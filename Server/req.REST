@@ -1,0 +1,25 @@
+POST  http://localhost:4000/api/username
+Content-Type: application/x-www-form-urlencoded
+
+{
+          "Name": "Ayush Rai ",
+          "Age":45, 
+          "Birth":"2003-10-26",
+          "Email": "ayush@vitbhopal.ac.in",
+          "Password": "456"
+
+}
+###
+
+
+Get http://localhost:4000/api/usernames
+Content-Type: application/json
+
+###
+DELETE http://localhost:4000/api/usernames
+Content-Type: application/json
+
+###
+DELETE  http://localhost:4000/api/username/6372249c9fad2730cfa57e28
+Content-Type: application/json
+

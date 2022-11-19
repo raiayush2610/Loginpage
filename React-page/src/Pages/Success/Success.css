@@ -1,0 +1,21 @@
+
+      .log-p{
+          margin-top: 15px;
+          text-align: center;
+      }
+      .info{
+          display: inline-block;
+      }
+      .card-input{
+          /* position: absolute;
+          left: 0; */
+          display: inline-block;
+          margin-left: 5px;
+      }
+      
+.card-body{
+           margin: 25px 10px 5px 10px;
+}
+.success{
+          margin: 15px 10px 5px 46px;
+}
