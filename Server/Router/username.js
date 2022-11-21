@@ -8,46 +8,95 @@ var multer = require('multer');
 
 const storage =multer.diskStorage({
       destination:(req,file,cb)=>{
-                cb(null,'./uploads/')
+            if (file.fieldname== "Profileimg") {
+                  cb(null,'./uploads/Profile');
+                  
+            } else if (file.fieldname == "Coverimg") {
+                  cb(null,'./uploads/coverpic');                 
+            }
+                
       },
       filename: (req,file,cb)=>{
-                cb(null,Date.now()+file.originalname)
+            if (file.fieldname== "Profileimg") {
+                cb(null,file.fieldname+Date.now()+file.originalname)
+            }else if(file.fieldname== "Coverimg"){
+                  cb(null, file.fieldname+Date.now()+file.originalname);  
+            }
+            
       }
 })
-const upload =multer({storage:storage})
+const upload =multer({storage:storage
+  
+});
 
-router.post('/api/username',upload.single('Profileimg'),async( req, res )=>{
-          try {
-            var img =fs.readFileSync(req.file.path);
-            var encode_img = img.toString('base64');
-            var finalImg ={
-                  contentType: req.file.mimetype,
-                  image:  new Buffer(encode_img, 'base64')
-            }     
-            console.log("post2d is workiing");
-            // console.log(finalImg);
-            // console.log(mimetype);
-           
-            const newUser = new userItem({
-                                    Name: req.body.fullName,
-                                    Age: req.body.age,
-                                    Birth: req.body.birth,
-                                    Profileimg:finalImg,                       
-                                    Email: req.body.username,
-                                    Password: req.body.password
+var mutipleUpload = upload.fields([{name: 'Profileimg',maxCount:  1},{name:'Coverimg',maxCount:  1}])
+
+router.post('/api/username',mutipleUpload,async( req, res )=>{
       
-                          })
-                          console.log("newuser"+newUser);
-                    const save = await newUser.save()
-                    .then((res)=>{
-                        console.log('image is saved')
-                    })
-                    res.status(200).json("Added Succefully");
-                                  
-          } catch (error) {
-                    res.json(error);                    
-          }
+
+      console.log("post is working");
+      try {
+        var img = fs.readFileSync(req.files.Profileimg[0].path);
+        var img2 = fs.readFileSync(req.files.Coverimg[0].path);
+        var encode_PI = img.toString();
+        var encode_CI = img2.toString('base64');
+     
+        var Profileimg ={
+            data:  new Buffer(encode_PI),
+            contentType:"image/png"
+            }
+        var CoveImg ={
+            data:  new Buffer(encode_CI),
+            contentType:"image/png"
+            }
+            console.log(typeof Profileimg);
+      
+        console.log(Profileimg);
+        
+        const newUser = new userItem({
+                                Name: req.body.fullName,
+                                Age: req.body.age,
+                                Birth: req.body.birth,
+                                Profileimg: Profileimg,                      
+                                Coverimg: CoveImg,                       
+                                Email: req.body.username,
+                                Password: req.body.password
+  
+                      })
+                      console.log("newuser"+newUser);
+                const save = await newUser.save()
+                .then((res)=>{
+                    console.log('image is saved')
+                })
+                res.status(200).json("Added Succefully");
+                              
+      } catch (error) {
+                res.json(error);                    
+      }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post("/api/user", async (req,res)=>{
       try {
             const reqEmail = req.body.Email;
@@ -69,7 +118,7 @@ router.post("/api/user", async (req,res)=>{
 // Get all iteam
 
 router.get('/api/usernames' ,async(req,res)=>{
-            console.log("hello");
+            
           try {
                 const allprofileItem = await userItem.find({});
                 res.status(200).json(allprofileItem);   

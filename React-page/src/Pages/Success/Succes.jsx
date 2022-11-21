@@ -5,15 +5,10 @@ import React, { useState, useEffect } from "react";
 import {resp} from "../Login/login";
 import {QRCodeSVG} from 'qrcode.react';
 import { GrShare } from 'react-icons/gr';
+import biryani from '../../imgs/biryani.jpg';
 let foundEntry = {}
 function Succes(){
-    const [Fname,setFname] = useState('');
-    const [Age,setAge] = useState('');
-    const [Birth,setBirth] = useState('');
-    const [Profile_img,setProfile] = useState(null);
-    const [Cover_img,setCprofile] = useState(null);
-    const [Email,setEmail] = useState( );
-    const [Password, setPassword] = useState();
+    
     const [entries, setEntries] = useState([]);
     useEffect(() => {
             async function getEntry(){
@@ -29,7 +24,7 @@ function Succes(){
       }, []);
       console.log(resp);
       entries.forEach(entry =>{
-        if(entry.Email ===resp)
+        if(entry.Email === resp)
             foundEntry = entry
       })
       console.log(foundEntry);
@@ -38,32 +33,37 @@ function Succes(){
         
     return(
         <>
-        
-        <div className="success">
-            {/* <SuccessHeader name = {(foundEntry.fName)}/> */}
-            <div className="row">
-                <div className="col-lg-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <h5 className="card-title">Basic Info</h5>
-                            <h6 className="info">First Name:  </h6> <p className="info">{foundEntry.Name}</p><br/>
-                            <h6 className="info">Age  </h6> <p className="info">{foundEntry.Age}</p><br/>
-                            <h6 className="info">Birth </h6> <p className="info">{foundEntry.Birth}</p><br/>
-                            
-                            <h6 className="info">Email:  </h6> <p className="info">{foundEntry.Email}</p><br/>
-                            <div class="nav-item dropdown">
-                        </div>                        
+        <div className="main">
+                <div style={{ backgroundImage: `url(${biryani})`,backgroundRepeat:"no-repeat",backgroundSize:"contain", 
+                    height:600,width:600  }} className="img-div" >
+                    
+                </div>
+                <div className="success" id="card">
+                    {/* <SuccessHeader name = {(foundEntry.fName)}/> */}
+                    <div className="row">
+                        <div className="col-lg-4">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Basic Info</h5>
+                                    <img src = {biryani} alt="food" className="middle-img"/>
+                                    <h6 className="info">First Name:  </h6> <p className="info">{foundEntry.Name}</p><br/>
+                                    <h6 className="info">Age  </h6> <p className="info">{foundEntry.Age}</p><br/>
+                                    <h6 className="info">Birth </h6> <p className="info">{foundEntry.Birth}</p><br/>
+                                    
+                                    <h6 className="info">Email:  </h6> <p className="info">{foundEntry.Email}</p><br/>
+                                   
+                                        <Popup trigger={<GrShare /> } >
+                                        <div><QRCodeSVG className="qrcode" value={foundEntry} /></div>
+                                        </Popup>
+                                                       
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-            </div>
-        </div>
-            
-        {/* <!-- Button trigger modal --> */}
-        
-            <Popup trigger={<GrShare /> } position="right center">
-                <div><QRCodeSVG value={foundEntry} /></div>
-            </Popup>
+                {/* <!-- Button trigger modal --> */}
+                
+        </div>   
                 
     </>
     )

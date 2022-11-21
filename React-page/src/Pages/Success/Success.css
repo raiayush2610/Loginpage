@@ -14,8 +14,25 @@
       }
       
 .card-body{
-           margin: 25px 10px 5px 10px;
+           margin: 25px 0 5px 6px;
+}
+
+.middle-img{
+    height: 250px;
+    width: 100%;
+}
+.main{
+    display: flex;
+}
+.img-div{
+    margin: 15px 0 0 45px ;
+    left: 500px;
+   
 }
 .success{
-          margin: 15px 10px 5px 46px;
+    margin: 15px 0 5px 5px;
+    width: 100%;
+}
+.qrcode{
+    margin: 0 47px 0 540px;
 }

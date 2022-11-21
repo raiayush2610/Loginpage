@@ -2,7 +2,6 @@ import {  useState } from "react";
 import "./register.css";
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { GrToast } from "react-icons/gr";
 
 function Register () {
     function refreshPage() {
@@ -23,12 +22,11 @@ function Register () {
             console.log("uploding......");
             setProfile(e.target.files[0]);
             console.log(e.target.files[0]);
-           
-            
-
+   
         }
         const uploadCprofile = (e) =>{
             console.log("uploding......");
+            console.log(e.target.files[0]);
             setCprofile(e.target.files[0])
            
 
@@ -39,46 +37,28 @@ function Register () {
                     let url=` http://localhost:4000/api/username`
                     try {
                         
-//---------------------------------------------------------------------------------------------------------------------------                    
                         const formdata = new FormData();
                         formdata.append('fullName', Name)
                         formdata.append('age', Age)
                         formdata.append('birth',Birth)
                         formdata.append('Profileimg',Profileimg)
-                        // formdata.append('Cover_img',Cover_img)
+                        formdata.append('Coverimg',Coverimg)
                         formdata.append('username',Email)
                         formdata.append('password',Password)
                         console.log("hello ");
                         console.log(formdata);
-                        // const data = {};
-                        // formdata.forEach((value, key) => (data[key] = value));
-                        // Log the data.
-                        // console.log(data);
+                        const res = await axios.post(url,formdata)
 
-                          const res = await axios.post(url,formdata)
-
-// -------------------------------------------------------------------------------------------------
-                    // const res = await axios.post(url,
-                    //     {
-                    //     Name:Name,
-                    //     Age:Age,
-                    //     Birth:Birth,
-                    //     // Profileimg:Profileimg,
-                    //     Email:Email,
-                    //     Password:Password
-                        
-                    // })
-// -------------------------------------------------------------------------------------------------                    
-                            console.log(res.formdata);
-                            setusernames((prev)=> [...prev,res.formdata]);                              
-                            //   alert("save succefully")
+                            // console.log(res.formdata);
+                            // setusernames((prev)=> [...prev,res.formdata]);                              
+                           
                               console.log(usernames);
 
                     } catch (error) {
                               console.log(error);
                     }
         }
-        // }Profile_img:Profile_img,Cover_img:Cover_img,
+       
      return ( 
      <>
            <main className="form-signin " autoComplete="off">
@@ -104,7 +84,6 @@ function Register () {
                             {(Profileimg == null) ?  <span>Please upload the File</span> : <span>The File is upload</span>}
                             <label htmlFor="profile">Select you profile pic</label>
                         </div>
-
                         <div className="form-floating img spa">
                             <input type="file" name="Cover_img" className="form-control bottom" autoComplete="off" onChange={uploadCprofile}   id="Cover_img"  />
                             {(Coverimg == null) ?  <span>Please upload the File</span> : <span>The File is upload</span>}
@@ -129,12 +108,7 @@ function Register () {
                         <p className="mt-5 mb-3 text-muted">&copy; Register</p>
                     </form>
                 </main>
-     
-     
-     
-     
-     
-     
+   
      </>
      
 )}
