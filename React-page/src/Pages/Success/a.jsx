@@ -20,7 +20,10 @@ function Succes(){
     const [entries, setEntries] = useState([]);
     const [Pimage,setPimage] = useState([]);
     const [Cimage,setCimage] = useState('');
-    const [Cimag2,setCimage2] = useState(' ');    
+    const [Cimag2,setCimage2] = useState(" ");
+
+
+    
     useEffect(() => {
             async function getEntry(){
             try {
@@ -29,7 +32,6 @@ function Succes(){
                 setEntries(res.data)
                 
                 setCimage(res.data[0].Coverimg.data);               
-                setPimage(res.data[0].Profileimg.data);               
             } catch (error) {
                 console.log(error)
             }
@@ -132,7 +134,6 @@ function Succes(){
               return string;
             }
           }()
-          
           var btoa = Base64.encode;
 
 
@@ -141,9 +142,16 @@ function Succes(){
                 if(entry.Email === resp)
                     foundEntry = entry
             })
-      console.log(foundEntry.Coverimg.data);
-  var image = 'data:image/png;base64,' + btoa(foundEntry.Coverimg.data);
-  // var ProfileIm = 'data:image/png;base64,' + btoa(Pimage);
+      console.log(foundEntry);
+
+
+
+
+
+
+    
+         
+         var image = 'data:image/png;base64,' + btoa(base64String);
     return(
         <>
         
@@ -165,7 +173,7 @@ function Succes(){
                                    
                                     
                                   
-                                    <img src = {`data:image/png;base64,${Cimage}`} alt="food" className="middle-img"/>
+                                    {/* <img src = {`data:image/png;base64,${Cimage}`} alt="food" className="middle-img"/> */}
                                     
                                    
                                     

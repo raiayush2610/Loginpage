@@ -21,12 +21,12 @@ function Register () {
         const uploadProfile = (e) =>{
             console.log("uploding......");
             setProfile(e.target.files[0]);
-            console.log(e.target.files[0]);
+            // console.log(e.target.files[0]);
    
         }
         const uploadCprofile = (e) =>{
             console.log("uploding......");
-            console.log(e.target.files[0]);
+            // console.log(e.target.files[0]);
             setCprofile(e.target.files[0])
            
 
@@ -45,8 +45,8 @@ function Register () {
                         formdata.append('Coverimg',Coverimg)
                         formdata.append('username',Email)
                         formdata.append('password',Password)
-                        console.log("hello ");
-                        console.log(formdata);
+                        // console.log("hello ");
+                        // console.log(formdata);
                         const res = await axios.post(url,formdata)
 
                             // console.log(res.formdata);
@@ -99,7 +99,7 @@ function Register () {
                             <label htmlFor="password">Password:</label>
                         </div>
                         <div>
-                        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={e => {addItem(e.preventDefault()); }} ><NavLink to = "/Register">submit</NavLink> </button>
+                        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={e => {addItem(e.preventDefault()); refreshPage()}} ><NavLink to = "/Login">submit</NavLink> </button>
                         <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
                         </div>    
                         <div className="container signin">
