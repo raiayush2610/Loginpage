@@ -11,13 +11,8 @@ let resp = ' ';
 // /Login this login page
 
 const Login = () =>{
-        const [Fname,setFname] = useState('');
-          const [Age,setAge] = useState('');
-          const [Birth,setBirth] = useState('');
-          const [Profile_img,setProfile] = useState(null);
-          const [Cover_img,setCprofile] = useState(null);
           const [Email,setEmail] = useState( );
-          const [Password, setPassword] = useState();
+          const [Password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async(e) => {
@@ -28,17 +23,33 @@ const Login = () =>{
                         Email:Email,
                         Password:Password
                     })
-                    // console.log(Email);
-                    resp = Email;
-                    // console.log(res.config.data);
-                    // console.log(resp);
-                    // console.log("data"+res.data);
-                    if(res.data ==="working"){
-                        navigate("/Sucees");
-                    }else{
-                        navigate('/Err')
-                    }
+                    // console.log(res.data);
                     
+                    if (res.data == null) {
+                        navigate("/Nouser");
+                    }else{
+                        var username = res.data.Email;
+                        var password = res.data.Password;
+                        
+                        if ( username=== Email) {
+                            if (Password === password) {
+                                // console.log(username);
+                                resp = Email;
+                                navigate("/Sucees");
+
+                                console.log("yes");
+                                                              
+                            }else{
+                                navigate('/Err')
+                                // console.log("ni");
+                            }
+                            
+                        }
+                       
+                        
+                        
+                        
+                    }
 
             
         } catch (error) {
@@ -62,11 +73,11 @@ const Login = () =>{
                         <input type="password" onChange={e => {setPassword(e.target.value)}} id="password" class="form-control bottom" name="password"/>
                         <label htmlFor="password">Password:</label>
                         </div>   
-                        
+                        {(Email == null) ? <span>please enter the details</span> : null}
                         <button type="submit" onClick={handleLogin} class="w-100 btn btn-lg btn-danger">Login</button>
                     </form>
                         <div class="container signin">
-                            <p><b>Sign to to new  account? <a href="/Register">Sign up</a></b>.</p>
+                            <p><b>Sign to to new  account? <a href="/Login">Sign up</a></b>.</p>
                             <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
                         </div>
                 </main>

@@ -99,7 +99,8 @@ function Register () {
                             <label htmlFor="password">Password:</label>
                         </div>
                         <div>
-                        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={e => {addItem(e.preventDefault()); refreshPage()}} ><NavLink to = "/Login">submit</NavLink> </button>
+                        {/* <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={e => {addItem(e.preventDefault()); refreshPage()}} ><NavLink to = "/">submit</NavLink> </button> */}
+                        <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={e => {addItem(e.preventDefault()); }} ><NavLink to = "/Register">submit</NavLink> </button>
                         <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
                         </div>    
                         <div className="container signin">

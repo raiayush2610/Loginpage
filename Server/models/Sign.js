@@ -4,14 +4,16 @@ const usernameSchema = new mongoose.Schema({
         Name:{type: String},
         Age:{ type : Number}, 
         Birth:{ type : Date},
+        
         Profileimg:{
-                type: Object,
-                contentType: "String",                      
+                type: Buffer,                      
+                data: JSON,
         },  
         Coverimg:{
-                type: Object,
-                contentType: "String",                      
+                type: Buffer,                      
+                data: JSON,                    
         }, 
+        
         
         Email:{ type : String},
         Password:{ type : String}

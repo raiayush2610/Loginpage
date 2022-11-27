@@ -30,9 +30,13 @@
    
 }
 .success{
-    margin: 15px 0 5px 5px;
+ 
+    margin:  0 5px 5px;
     width: 100%;
 }
-.qrcode{
-    margin: 0 47px 0 540px;
+#qrCodeEl{
+    margin: 40px 0 0px 550px;
 }
+/* #qrcode{
+    margin: 45px 47px 0 540px;
+} */

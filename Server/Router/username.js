@@ -34,29 +34,23 @@ var mutipleUpload = upload.fields([{name: 'Profileimg',maxCount:  1},{name:'Cove
 router.post('/api/username',mutipleUpload,async( req, res )=>{
       
 
-      // console.log("post is working");
+      // console.log(fs.readFileSync(req.files.Profileimg[0].path).toJSON());
       try {
            
-                  var img = fs.readFileSync(req.files.Profileimg[0].path);
-                  var img2 = fs.readFileSync(req.files.Coverimg[0].path);
-                  var encode_PI = img.toString();
-                  var encode_CI = img2.toString();
-                  var Profileimg ={
-                        data:  new Buffer(encode_PI),
-                        contentType:"image/png"
-                        }
-                    var CoveImg ={
-                        data:  new Buffer(encode_CI),
-                        contentType:"image/png"
-                        }
+                  var img = (fs.readFileSync(req.files.Profileimg[0].path).toJSON());
+                  console.log(img);
+                  var img2 = (fs.readFileSync(req.files.Coverimg[0].path).toJSON());
+                  var encode_PI = (img).toString("base64");
+                  var encode_CI = (img2).toString("base64");
+                  
                     
                    console.log(req.body.password);     
-      const newUser = new userItem({
+                        const newUser = new userItem({
                               Name: req.body.fullName,
                               Age: req.body.age,
                               Birth: req.body.birth,
-                              Profileimg: Profileimg,                      
-                              Coverimg: CoveImg,                       
+                              Profileimg: encode_PI,
+                              Coverimg: encode_CI,                       
                               Email: req.body.username,
                               Password: req.body.password
 
@@ -73,30 +67,20 @@ router.post('/api/username',mutipleUpload,async( req, res )=>{
                                
       }
 })
-
+// router.get("/api/user",async(re))
 router.post("/api/user", async (req,res)=>{
       try {
             const reqEmail = req.body.Email;
+            console.log(req.body.Email);
             const reqPassword = req.body.Password;
             const item = await userItem.findOne({Email: reqEmail});
-            
-            console.log(reqPassword);
-            console.log("item"+item.Password);
-            
-                  if (reqPassword===item.Password){
-                        // console.log("yes");
-                        res.json("working");
-                        res.json(Email);
-                  } if (Password== null){
-                        console.log("no");
-                  }
-                  else{
-                        console.log("no");
-                  }
-            
+            console.log(item);
+           
+            res.json(item)
+           
       
       } catch (error) {
-          console.log(error);  
+          return 0  
       }
 })
 

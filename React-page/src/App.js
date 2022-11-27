@@ -1,7 +1,7 @@
 import  ReactDOM from 'react-dom/client';
 import './App.css';
 import {  Footer , Navbar } from "./Components";
-import {Home,  Admin,  Register, NoPage, Login ,Succes,Errr} from './Pages';
+import {Home,  Admin,  Register, NoPage, Login ,Succes,Errr,Nouser} from './Pages';
 // import Order from './Order';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
@@ -21,6 +21,7 @@ const App = () => {
         <Route path = "/Register" element = {<Register/>}/>
         <Route path = "/Sucees" element = {<Succes/>}/>
         <Route path = "/Err" element = {<Errr/>}/>
+        <Route path = "/Nouser" element = {<Nouser/>}/>
         <Route path= '*' element ={<NoPage/>}/>
       </Routes>
        {/* <Footer/> */}
