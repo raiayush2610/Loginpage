@@ -1,7 +1,7 @@
 import  ReactDOM from 'react-dom/client';
 import './App.css';
 import {  Footer , Navbar } from "./Components";
-import {Home,  Admin,  Register, NoPage, Login ,Succes,Errr,Nouser} from './Pages';
+import {Home,  Admin,  Register, NoPage, Login ,Succes,Errr,Nouser} from './Components/Pages';
 // import Order from './Order';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 

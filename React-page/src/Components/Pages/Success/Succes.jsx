@@ -168,12 +168,12 @@ function Succes(){
                     console.log(foundEntry);
                     languageString1 = JSON.stringify("Name:"+foundEntry.Name+","+"Age:"+foundEntry.Age+","+"Email:"+foundEntry.Email);
                     console.log(entries);
-                    console.log(foundEntry.Coverimg.data);
+                    // console.log(foundEntry.Coverimg.data);
             })
            
-          //   var imageBlod=foundEntry.Coverimg.data
-          //   var image = `data:image/base64` + btoa(foundEntry.Coverimg.data);
-          //   var image2 = `data:image/png;base64` + btoa(foundEntry.Coverimg.data);
+            // var imageBlod=foundEntry.Coverimg.data
+            // var image = `data:image/base64` + btoa(foundEntry.Coverimg.data);
+            // var image2 = `data:image/png;base64` + btoa(foundEntry.Coverimg.data);
           //   const reader = new FileReader();
           // // reader.readAsDataURL(imageBlod);
           // reader.onloadend = () => {
@@ -188,10 +188,10 @@ function Succes(){
         <>
         
         <div className="main">
-            {/* <img src = {imgUrl} alt="food" className="middle-img"/>
-            <img src = {image2} alt="food" className="middle-img"/> */}
-            {/* <img src={image2}/>
-            <img src={image3}/> */}
+            {/* <img src = {imageBlod} alt="food" className="middle-img"/>
+            <img src = {image} alt="food" className="middle-img"/>
+            <img src={image2}/>
+            <img src={image2}/> */}
           
             
                 <div style={{ backgroundImage: `url(${biryani})`,backgroundRepeat:"no-repeat",backgroundSize:"contain", 

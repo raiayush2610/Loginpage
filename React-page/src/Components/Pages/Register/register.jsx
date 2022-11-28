@@ -2,6 +2,7 @@ import {  useState } from "react";
 import "./register.css";
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import validator from 'validator';
 
 function Register () {
     function refreshPage() {
@@ -13,11 +14,11 @@ function Register () {
           const [Birth,setBirth] = useState('');
           const [Profileimg,setProfile] = useState();
           const [Coverimg,setCprofile] = useState(null);
-          const [Email,setEmail] = useState( );
+          const [Email,setEmail] = useState('');
           const [Password, setPassword] = useState();
          
           const[usernames,setusernames] = useState([]);
-
+          
         const uploadProfile = (e) =>{
             console.log("uploding......");
             setProfile(e.target.files[0]);
@@ -93,6 +94,7 @@ function Register () {
                         <div className="form-floating imgspa">
                             <input type="email" name="username" className="form-control bottom" autoComplete="off"  onChange={(e)=>{setEmail(e.target.value)}} id="email"/>
                             <label htmlFor="email">Email:</label>
+                            {(validator.isEmail(Email)) ?  <span></span> : <span>Invalid Email</span>}
                         </div>
                         <div className="form-floating ">
                             <input type="password" name="password" className="form-control bottom" autoComplete="off"  onChange={(e)=>{setPassword(e.target.value)}}  id="password" />

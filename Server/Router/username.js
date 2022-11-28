@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 var Buffer = require('buffer/').Buffer
+const bcrypt = require("bcrypt");
 
 
 const userItem = require('../models/Sign');
@@ -36,10 +37,11 @@ router.post('/api/username',mutipleUpload,async( req, res )=>{
 
       // console.log(fs.readFileSync(req.files.Profileimg[0].path).toJSON());
       try {
-           
-                  var img = (fs.readFileSync(req.files.Profileimg[0].path).toJSON());
+                  const plainPassword = req.body.password;
+                  const hashPassword = bcrypt.hashSync(plainPassword, 7);
+                  var img = (fs.readFileSync(req.files.Profileimg[0].path))
                   console.log(img);
-                  var img2 = (fs.readFileSync(req.files.Coverimg[0].path).toJSON());
+                  var img2 = (fs.readFileSync(req.files.Coverimg[0].path))
                   var encode_PI = (img).toString("base64");
                   var encode_CI = (img2).toString("base64");
                   
@@ -52,10 +54,10 @@ router.post('/api/username',mutipleUpload,async( req, res )=>{
                               Profileimg: encode_PI,
                               Coverimg: encode_CI,                       
                               Email: req.body.username,
-                              Password: req.body.password
+                              Password: hashPassword
 
                   })
-                  console.log("newuser"+newUser);
+                  // console.log("newuser"+newUser);
                   
             const save = await newUser.save()
             save.json("Added Succefully");
@@ -71,12 +73,19 @@ router.post('/api/username',mutipleUpload,async( req, res )=>{
 router.post("/api/user", async (req,res)=>{
       try {
             const reqEmail = req.body.Email;
-            console.log(req.body.Email);
+            // console.log(req.body.Email);
             const reqPassword = req.body.Password;
             const item = await userItem.findOne({Email: reqEmail});
-            console.log(item);
-           
-            res.json(item)
+            if(item === null){
+                  res.json("no")
+              }else{           
+            const savePassword = item.Password;
+            if(bcrypt.compareSync(reqPassword, savePassword) === true){
+                    res.status(200).json(reqEmail)
+            }else if(bcrypt.compareSync(reqPassword, savePassword) === false){
+                res.json("false");
+            }
+      }
            
       
       } catch (error) {
